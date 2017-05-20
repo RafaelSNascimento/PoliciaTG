@@ -1,0 +1,348 @@
+include layout
+	script(src="/javascripts/jsUsuario/crudAutoridade.js")
+nav.navbar.navbar-inverse
+	script.
+		var dadosIniciais = !{data}
+	.container-fluid
+		// Brand and toggle get grouped for better mobile display
+		.navbar-header
+			img.navbar-brand(src="bootstrap/css/icons/police.png")
+			button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+				span.sr-only Toggle navigation
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+
+		div( id="bs-example-navbar-collapse-1" class="collapse navbar-collapse text-center")
+			ul(class="nav navbar-nav navbar-left")
+				li(class = "active" class="dropdown")
+					a(id ="ca", href="#") Cadastrar Autoridade 
+						span.glyphicon.glyphicon-plus
+				li
+					a(id ="co",href="#") Consultar Autoridades 
+						span.glyphicon.glyphicon-list-alt
+
+			ul(class="nav navbar-nav navbar-right")
+				li
+					a(href="/home") Home 
+						span.glyphicon.glyphicon-home
+.container-fluid.text-center#cadastro
+	.row-fluid
+		form(id="formCadastrarA", method='POST', style="width: auto;")
+			div(class="form-group")
+				label(for="nome" style="float:left") Nome
+				input(type='text',class="form-control", id = "nome", style="width: 100%;" ,placeholder="Nome", maxlength="230")
+
+			.row
+				.col-sm-4
+					.form-group
+						label(for="titulo" style="float:left") Titulo
+						input(type='text',class="form-control", id = "titulo", style="width: 100%;",placeholder="Titulo", maxlength="230")
+				.col-sm-8
+					.form-group
+						label(for="apelido" style="float:left") Apelido
+						input(type='text',class="form-control", id = "apelido", style="width: 100%;",placeholder="Apelido", maxlength="230")
+			.row
+				.col-sm-4
+					.form-group
+						label(for="funcao" style="float:left") Função
+						input(type='text',class="form-control", id = "funcao", style="width: 100%;",placeholder="Titulo", maxlength="230")
+				.col-sm-8
+					.form-group
+						label(for="empresa" style="float:left") Empresa
+						input(type='text',class="form-control", id = "empresa", style="width: 100%;",placeholder="Empresa", maxlength="230")
+			.row
+				.col-sm-6
+					.form-group
+						label(for="nascimento" style="float:left") Data De Nascimento
+						input(type="text", id="nascimento",class="form-control", style="width: 100%;" ,placeholder="Data De Nascimento")
+				.col-sm-6
+					.form-group
+						label(for="selectPronomes" style="float:left") Grupo De Tratamento
+						select(name="select", id="selectPronomes",class="form-control", data-style="btn-primary")
+							option(disabled selected value) -- Selecione uma Opção --
+							option(value="VOSSA EXCELÊNCIA") Vossa Excelência
+							option(value="VOSSA SENHORIA") Vossa Senhoria
+							option(value="VOSSA MAGNIFICÊNCIA") Vossa Magnificência
+							option(value="VOSSA SANTIDADE") Vossa Santidade
+							option(value="VOSSA EMINÊNCIA OU VOSSA EMINÊNCIA REVERENDÍSSIMA") Vossa Eminência ou Vossa Eminência Reverendíssima
+							option(value="VOSSA EXCELÊNCIA REVERENDÍSSIMA") Vossa Excelência Reverendíssima
+							option(value="VOSSA REVERENDÍSSIMA OU VOSSA SENHORIA REVERENDÍSSIMA") Vossa Reverendíssima ou Vossa Senhoria Reverendíssima
+							option(value="VOSSA REVERÊNCIA") Vossa Reverência
+			div.row
+				.col-sm-4
+					.form-group
+						label(for="partido" style="float:left") Partido
+						input(type="text", id="partido",class="form-control", style="width: 100%;" ,placeholder="Partido", maxlength="230")
+				.col-sm-4
+					.form-group
+						label(for="selectUnidade" style="float:left") Batalhão
+						select(name="select", id="selectUnidade",class="form-control", data-style="btn-primary")
+							option(disabled selected value) -- Selecione uma Opção --
+
+				.col-sm-4
+					.form-group
+						label(for="selectGenero" style="float:left") Gênero
+						select(name="select", id="selectGenero",class="form-control", data-style="btn-primary")
+							option(disabled selected value) -- Selecione uma Opção --
+							option(value="F") Feminino
+							option(value="M") Masculino
+			hr
+			.row
+				.col-md-2.form-group
+					label(for="cep" style="float:left") CEP
+					input#cep(type='text', maxlength='8', placeholder='Ex: 13483-087', onkeypress='return event.charCode >= 48 && event.charCode <= 57' ,class="form-control")
+				.col-md-1.form-group
+					label(for="uf" style="float:left") UF
+					input#uf(type='text',class="form-control", maxlength="230")
+				.col-md-2.form-group
+					label(for="cidade" style="float:left") Cidade
+					input#cidade(type='text',class="form-control", maxlength="230")
+				.col-md-3.form-group
+					label(for="logradouro" style="float:left") Logradouro
+					input#logradouro(type='text',class="form-control", maxlength="230")
+				.col-md-2.form-group
+					label(for="bairro" style="float:left") Bairro
+					input#bairro(type='text',class="form-control", maxlength="230")
+				.col-md-2.form-group
+					label(for="numero" style="float:left") Numero
+					input#numero(type='number',class="form-control", maxlength="10")
+			hr
+
+			.row
+				.col-sm-2
+					select(name="select", id="selectTipo",class="form-control", data-style="btn-primary")
+						option(value="t") Telefone
+						option(value="c") Celular
+				.col-sm-4
+					.input-group
+						input.form-control(id="numeroTel", type='text', placeholder='Numero')
+						span.input-group-btn
+							button.btn.btn-default(id="adicionarT", type='button') Adicionar
+
+				.col-sm-6
+					.table-responsive.panel.panel-default.shadow
+						table.table.table-bordered.text-center.table-hover.table-condensed#tTelefone
+							thead
+								tr.info
+									th.text-center Tipo
+									th.text-center Numero
+									th.text-center Excluir
+							tbody
+			hr
+			.row
+				.col-sm-6
+					.input-group
+						input.form-control(id="email", type='text', placeholder='E-mail')
+						span.input-group-btn
+							button.btn.btn-default(id="adicionarE", type='button') Adicionar
+
+				.col-sm-6
+					.table-responsive.panel.panel-default.shadow
+						table.table.table-bordered.text-center.table-hover.table-condensed#tEmail
+							thead
+								tr.info
+									th.text-center Email
+									th.text-center Excluir
+							tbody
+			hr
+		p
+			button(type="button" id="cadastrarA" class="btn btn-default btn-lg") Cadastrar Autoridade 
+				span(class="glyphicon glyphicon-star" aria-hidden="true")
+		hr
+
+.container-fluid#consulta
+	.row
+		.col-sm-12
+			form(id="formConsultar", target='_blank', action='/pdf', method='POST', style="width: auto;")
+				.col-sm-3
+					.form-group
+						label(for="nomeConsultar" style="float:left") Nome
+						input(type='text',class="form-control", name="data[nome]", id = "nomeConsultar", style="width: 100%;" ,placeholder="Nome", maxlength="230")
+
+				.col-sm-2
+					.form-group
+						label(for="selectBatalhaoC" style="float:left") Batalhão
+						select(name="data[batalhao]", id="selectBatalhaoC",class="form-control", data-style="btn-primary")
+							option(value="") -- Todos --
+
+				.col-sm-2
+					.form-group
+						label(for="selectMes" style="float:left") Ultima Att.
+						input(type='number',class="form-control", id = "selectMes",name="data[mes]" style="width: 100%;" ,placeholder="Meses")
+
+				.col-sm-3
+					.form-group
+						label(for="cidadeConsultar" style="float:left") Cidade
+						input(type='text',class="form-control", id = "cidadeConsultar", name="data[cidade]", style="width: 100%;" ,placeholder="Cidade", maxlength="230")
+				.col-sm-1
+					.form-group
+						label(for="pesquisarA")  
+						button.btn.btn-default.form-control(type='button' id='pesquisarA')
+							span.glyphicon.glyphicon-search
+				.col-sm-1
+					.form-group
+						label(for="pdf" style="float:left") Relatório
+						button.btn.btn-default.form-control(type='submit' id='pdf')
+							span.glyphicon.glyphicon-list-alt
+
+
+	.row
+		.col-sm-12
+			.table-responsive(style="height: auto !important; max-height: 380px; overflow-y: auto !important;")
+				table.table.table-bordered.text-center.table-hover.table-condensed#autoridades.table-striped
+						thead
+							tr.info
+								th.text-center Id
+								th.text-center Nome
+								th.text-center Apelido
+								th.text-center Partido
+								th.text-center Genêro
+								th.text-center CEP
+								th.text-center UF
+								th.text-center Cidade
+								th.text-center Bairro
+								th.text-center Logradouro
+								th.text-center Numero
+								th.text-center Telefones
+								th.text-center Email
+								th.text-center ult.Att.
+								th.text-center Função
+								th.text-center Nascimento
+								th.text-center Tratamento
+								th.text-center Titulo
+								th.text-center Unidade
+								th.text-center Empresa
+								th.text-center Ações
+						tbody
+
+// Modal
+#myModal.modal.fade.animated.tada(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+	.modal-dialog.modal-lg
+		.modal-content
+			.modal-header
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') ×
+				h1#myModalLabel.modal-title.text-center Alterar Autoridade
+			.modal-body
+				.row-fluid
+					form(id="formAlterarA", method='POST', style="width: auto;")
+						div(class="form-group")
+							label(for="nomeAlterar" style="float:left") Nome
+							input(type='text',class="form-control", id = "nomeAlterar", style="width: 100%;" ,placeholder="Nome", maxlength="230")
+						.row
+							.col-sm-4
+								.form-group
+									label(for="tituloAlterar" style="float:left") Titulo
+									input(type='text',class="form-control", id = "tituloAlterar", style="width: 100%;",placeholder="Titulo", maxlength="230")
+							.col-sm-8
+								.form-group
+									label(for="apelidoAlterar" style="float:left") Apelido
+									input(type='text',class="form-control", id = "apelidoAlterar", style="width: 100%;",placeholder="Apelido", maxlength="230")
+						.row
+							.col-sm-4
+								.form-group
+									label(for="funcaoAlterar" style="float:left") Função
+									input(type='text',class="form-control", id = "funcaoAlterar", style="width: 100%;",placeholder="Titulo", maxlength="230")
+							.col-sm-8
+								.form-group
+									label(for="empresaAlterar" style="float:left") Empresa
+									input(type='text',class="form-control", id = "empresaAlterar", style="width: 100%;",placeholder="Empresa", maxlength="230")
+						.row
+							.col-sm-6
+								.form-group
+									label(for="nascimentoAlterar" style="float:left") Data De Nascimento
+									input(type="text", id="nascimentoAlterar",class="form-control", style="width: 100%;" ,placeholder="Data De Nascimento")
+							.col-sm-6
+								.form-group
+									label(for="selectPronomesAlterar" style="float:left") Grupo De Tratamento
+									select(name="select", id="selectPronomesAlterar",class="form-control", data-style="btn-primary")
+										option(disabled selected value) -- Selecione uma Opção --
+										option(value="VOSSA EXCELÊNCIA") Vossa Excelência
+										option(value="VOSSA SENHORIA") Vossa Senhoria
+										option(value="VOSSA MAGNIFICÊNCIA") Vossa Magnificência
+										option(value="VOSSA SANTIDADE") Vossa Santidade
+										option(value="VOSSA EMINÊNCIA OU VOSSA EMINÊNCIA REVERENDÍSSIMA") Vossa Eminência ou Vossa Eminência Reverendíssima
+										option(value="VOSSA EXCELÊNCIA REVERENDÍSSIMA") Vossa Excelência Reverendíssima
+										option(value="VOSSA REVERENDÍSSIMA OU VOSSA SENHORIA REVERENDÍSSIMA") Vossa Reverendíssima ou Vossa Senhoria Reverendíssima
+										option(value="VOSSA REVERÊNCIA") Vossa Reverência
+						div.row
+							.col-sm-4
+								.form-group
+									label(for="partidoAlterar" style="float:left") Partido
+									input(type="text", id="partidoAlterar",class="form-control", style="width: 100%;" ,placeholder="Partido", maxlength="230")
+							.col-sm-4
+								.form-group
+									label(for="selectUnidadeAlterar" style="float:left") Batalhão
+									select(name="select", id="selectUnidadeAlterar",class="form-control", data-style="btn-primary")
+										option(disabled selected value) -- Selecione uma Opção --
+
+							.col-sm-4
+								.form-group
+									label(for="selectGeneroAlterar" style="float:left") Gênero
+									select(name="select", id="selectGeneroAlterar",class="form-control", data-style="btn-primary")
+										option(disabled selected value) -- Selecione uma Opção --
+										option(value="F") Feminino
+										option(value="M") Masculino
+						hr
+						.row
+							.col-md-2.form-group
+								label(for="cepAlterar" style="float:left") CEP
+								input#cepAlterar(type='text', maxlength='8', placeholder='Ex: 13483-087', onkeypress='return event.charCode >= 48 && event.charCode <= 57' ,class="form-control")
+							.col-md-2.form-group
+								label(for="ufAlterar" style="float:left") UF
+								input#ufAlterar(type='text',class="form-control", maxlength="230")
+							.col-md-2.form-group
+								label(for="cidadeAlterar" style="float:left") Cidade
+								input#cidadeAlterar(type='text',class="form-control", maxlength="230")
+							.col-md-2.form-group
+								label(for="logradouroAlterar" style="float:left") Logr.
+								input#logradouroAlterar(type='text',class="form-control", maxlength="230")
+							.col-md-2.form-group
+								label(for="bairroAlterar" style="float:left") Bairro
+								input#bairroAlterar(type='text',class="form-control", maxlength="230")
+							.col-md-2.form-group
+								label(for="numeroAlterar" style="float:left") Numero
+								input#numeroAlterar(type='number',class="form-control")
+						hr
+
+						.row
+							.col-sm-2
+								select(name="select", id="selectTipoAlterar",class="form-control", data-style="btn-primary")
+									option(value="t") Telefone
+									option(value="c") Celular
+							.col-sm-4
+								.input-group
+									input.form-control(id="numeroTelAlterar", type='text', placeholder='Numero')
+									span.input-group-btn
+										button.btn.btn-default(id="adicionarTAlterar", type='button') Adicionar
+
+							.col-sm-6
+								.table-responsive.panel.panel-default.shadow
+									table.table.table-bordered.text-center.table-hover.table-condensed#tTelefoneAlterar
+										thead
+											tr.info
+												th.text-center Tipo
+												th.text-center Numero
+												th.text-center Excluir
+										tbody
+						hr
+						.row
+							.col-sm-6
+								.input-group
+									input.form-control(id="emailAlterar", type='text', placeholder='E-mail')
+									span.input-group-btn
+										button.btn.btn-default(id="adicionarEAlterar", type='button') Adicionar
+
+							.col-sm-6
+								.table-responsive.panel.panel-default.shadow
+									table.table.table-bordered.text-center.table-hover.table-condensed#tEmailAlterar
+										thead
+											tr.info
+												th.text-center Email
+												th.text-center Excluir
+										tbody
+						hr
+			.modal-footer
+				button.btn.btn-default(type='button', data-dismiss='modal') Close
+				button.btn.btn-primary(type='button' id='alterarAutoridade') Alterar

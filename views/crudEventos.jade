@@ -1,0 +1,303 @@
+include layout
+	script(src="/javascripts/jsUsuario/crudEvento.js")
+	
+nav.navbar.navbar-inverse
+	script.
+		var dadosIniciais = !{data}
+	.container-fluid
+		// Brand and toggle get grouped for better mobile display
+		.navbar-header
+			button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+				span.sr-only Toggle navigation
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+
+		div( id="bs-example-navbar-collapse-1" class="collapse navbar-collapse text-center")
+			ul(class="nav navbar-nav navbar-left")
+				li(class = "active")
+					a(id ="cadastrar", href="#") Cadastrar Evento
+				li
+					a(id ="consultar", href="#") Consultar Eventos
+			ul(class="nav navbar-nav navbar-right")
+				li
+					a(href="/home") Home 
+						span.glyphicon.glyphicon-home
+					
+//Cadastrar Evento
+div.container-fluid.text-center#ca
+	div.row-fluid
+		form(id="formCadastrarEventos", method='POST', style="width: auto;")
+			div(class="form-group")
+				label(for="nome" style="float:left") Nome do Evento
+				input(type='text',class="form-control", id = "nome", style="width: 100%;" ,placeholder="Nome",maxlength="230")
+			.row
+				.col-sm-4.form-group
+					label(for="data" style="float:left") Data do Evento
+					input(type="text", id="data",class="form-control", style="width: 100%;" ,placeholder="Data do Evento")
+				.col-sm-4.form-group
+					label(for="horario" style="float:left") Horário
+					input(type="text", id="horario",class="form-control", style="width: 100%;" ,placeholder="Horário")
+				.col-sm-4.form-group
+					label(for="cep" style="float:left") CEP
+					input#cep(type='text', maxlength='8', placeholder='Ex: 13483-087', onkeypress='return event.charCode >= 48 && event.charCode <= 57' ,class="form-control")
+
+
+			.row
+				.col-sm-2.form-group
+					label(for="uf" style="float:left") UF
+					input#uf(type='text',class="form-control",maxlength="3")
+				.col-sm-3.form-group
+					label(for="cidade" style="float:left") Cidade
+					input#cidade(type='text',class="form-control",maxlength="230")
+				.col-sm-3.form-group
+					label(for="logradouro" style="float:left") Endereço
+					input#logradouro(type='text',class="form-control",maxlength="230")
+				.col-sm-2.form-group
+					label(for="bairro" style="float:left") Bairro
+					input#bairro(type='text',class="form-control",maxlength="230")
+				.col-sm-2.form-group
+					label(for="numero" style="float:left") Numero
+					input#numero(type='number',class="form-control",maxlength="5")
+			hr
+			h3(style="color:black;") Trajes
+			.row
+				.col-sm-4.form-group
+					label(for="pm" style="float:left") PM
+					input#pm(type='text',class="form-control",maxlength="230")
+				.col-sm-4.form-group
+					label(for="civisVeteranos" style="float:left") Civis e Veteranos
+					input#civisVeteranos(type='text',class="form-control",maxlength="230")
+				.col-sm-4.form-group
+					label(for="ffaa" style="float:left") FFAA
+					input#ffaa(type='text',class="form-control",maxlength="230")
+
+
+			hr
+			p
+				button(type="button" id="cadastrarE" class="btn btn-default btn-lg") Cadastrar Evento 
+					span(class="glyphicon glyphicon-ok-circle" aria-hidden="true")
+		hr
+
+//consultar evento
+div.container-fluid.text-center#co
+	.row
+		.col-sm-12
+
+			.table-responsive(style="height: auto !important; max-height: 380px; overflow-y: auto !important;")
+				table.table.table-bordered.text-center.table-hover.table-condensed#eventos.table-striped
+						thead
+							tr.info
+								th.text-center Id
+								th.text-center Nome
+								th.text-center Data
+								th.text-center Hora
+								th.text-center Cep
+								th.text-center UF
+								th.text-center Cidade
+								th.text-center Bairro
+								th.text-center Logradouro
+								th.text-center Numero
+								th.text-center Traje PM
+								th.text-center Traje Civil e Veterano
+								th.text-center Traje FFAA
+								th.text-center Ações
+						tbody
+		hr
+#myModal.modal.fade.animated.tada(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+	.modal-dialog.modal-lg
+		.modal-content
+			.modal-header
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') ×
+				h1#myModalLabel.modal-title.text-center Alterar Autoridade
+			.modal-body
+				.text-center
+					form(id="formAlterarEventos", method='POST', style="width: auto;")
+						div(class="form-group")
+							label(for="nomeAlterar" style="float:left") Nome do Evento
+							input(type='text',class="form-control", id = "nomeAlterar", style="width: 100%;" ,placeholder="Nome",maxlength="230")
+						.row
+							.col-sm-4.form-group
+								label(for="dataAlterar" style="float:left") Data do Evento
+								input(type="text", id="dataAlterar",class="form-control", style="width: 100%;" ,placeholder="Data do Evento")
+							.col-sm-4.form-group
+								label(for="horarioAlterar" style="float:left") Horário
+								input(type="text", id="horarioAlterar",class="form-control", style="width: 100%;" ,placeholder="Horário")
+							.col-sm-4.form-group
+								label(for="cepAlterar" style="float:left") CEP
+								input#cepAlterar(type='text', maxlength='8', placeholder='Ex: 13483-087', onkeypress='return event.charCode >= 48 && event.charCode <= 57' ,class="form-control")
+
+
+						.row
+							.col-sm-2.form-group
+								label(for="ufAlterar" style="float:left") UF
+								input#ufAlterar(type='text',class="form-control",maxlength="3")
+							.col-sm-3.form-group
+								label(for="cidadeAlterar" style="float:left") Cidade
+								input#cidadeAlterar(type='text',class="form-control",maxlength="230")
+							.col-sm-3.form-group
+								label(for="logradouroAlterar" style="float:left") Endereço
+								input#logradouroAlterar(type='text',class="form-control",maxlength="230")
+							.col-sm-2.form-group
+								label(for="bairroAlterar" style="float:left") Bairro
+								input#bairroAlterar(type='text',class="form-control",maxlength="230")
+							.col-sm-2.form-group
+								label(for="numeroAlterar" style="float:left") Numero
+								input#numeroAlterar(type='number',class="form-control",maxlength="5")
+						hr
+						h3(style="color:black;") Trajes
+						.row
+							.col-sm-4.form-group
+								label(for="pmAlterar" style="float:left") PM
+								input#pmAlterar(type='text',class="form-control",maxlength="230")
+							.col-sm-4.form-group
+								label(for="civisVeteranosAlterar" style="float:left") Civis e Veteranos
+								input#civisVeteranosAlterar(type='text',class="form-control",maxlength="230")
+							.col-sm-4.form-group
+								label(for="ffaaAlterar" style="float:left") FFAA
+								input#ffaaAlterar(type='text',class="form-control",maxlength="230")
+			.modal-footer
+				.text-center
+					button.btn.btn-warning(type='button', data-dismiss='modal' style="margin: 0 auto !important; float:none !important;") Close
+					button.btn.btn-success(type='button' id='alterarEvento') Alterar
+
+#myModal2.modal.fade.animated.tada(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+	.modal-dialog.modal-lg
+		.modal-content
+			.modal-header
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') ×
+				h1#myModalLabel.modal-title.text-center Lista de Convidados
+			.modal-body(style="padding-bottom: 0px !important;")
+				.container-fluid
+					.row
+						.col-xs-4(style="padding: 2px;")
+							a(id="autoridadess" href='#' class="btn btn-warning" role="button" style="width:100%;") Autoridades
+						.col-xs-4(style="padding: 2px;")
+							a(id="convidadoss" href='#' class="btn btn-success" role="button" style="width: 100%;") Lista de Convidados
+						.col-xs-4(style="padding: 2px;")
+							a(id="firebasess" href='#' class="btn btn-info" role="button" style="width: 100%;") Status
+				hr
+				.container-fluid.autoridades.text-center(style="background-color: rgba(240,173,78, 0.3);")
+
+					.row
+						form(id="formConsultar", target='_blank', action='/pdf', method='POST', style="width: auto;")
+						.col-sm-3
+							.form-group
+								label(for="nomeConsultar" style="float:left") Nome
+								input(type='text',class="form-control", name="data[nome]", id = "nomeConsultar", style="width: 100%;" ,placeholder="Nome", maxlength="230")
+						.col-sm-3
+							.form-group
+								label(for="selectBatalhaoC" style="float:left") Batalhão
+								select(name="data[batalhao]", id="selectBatalhaoC",class="form-control", data-style="btn-primary")
+									option(value="") -- Todos --
+						.col-sm-2
+							.form-group
+								label(for="selectMes" style="float:left") Att.
+								input(type='number',class="form-control", id = "selectMes",name="data[mes]" style="width: 100%;" ,placeholder="Meses")
+
+						.col-sm-3
+							.form-group
+								label(for="cidadeConsultar" style="float:left") Cidade
+								input(type='text',class="form-control", id = "cidadeConsultar", name="data[cidade]", style="width: 100%;" ,placeholder="Cidade", maxlength="230")
+						.col-sm-1
+							.form-group
+								label(for="pesquisarC" style="float:left")  
+								button.btn.btn-default.form-control(type='button' id='pesquisar')
+									span.glyphicon.glyphicon-search
+
+					.row
+						.col-sm-12
+							div.table-responsive(style="height: auto !important; max-height: 300px; overflow-y: auto !important;")
+								table.table.table-bordered.text-center.table-hover.table-condensed#autoridades.table-striped
+									thead
+										tr.warning
+											th.text-center
+												input#todos(type='checkbox')
+											th.text-center Id
+											th.text-center Nome
+											th.text-center Titulo
+											th.text-center Partido
+											th.text-center Cidade
+											th.text-center ult.Att.
+											th.text-center Unidade
+									tbody
+
+					button.btn.btn-warning(type='button',id="teste" style="margin: 5px !important;") Adicionar Convidados
+
+				.container-fluid.convidados(style="background-color: rgba(92,184,92, 0.3);")
+					.row
+						form(id="formConsultarConvidados", target='_blank', method='POST', style="width: auto;")
+						.col-sm-3
+							.form-group
+								label(for="nomeConsultarC" style="float:left") Nome
+								input(type='text',class="form-control", name="data[nome]", id = "nomeConsultarC", style="width: 100%;" ,placeholder="Nome", maxlength="230")
+
+						.col-sm-3
+							.form-group
+								label(for="selectBatalhaoCC" style="float:left") Batalhão
+								select(name="data[batalhao]", id="selectBatalhaoCC",class="form-control", data-style="btn-primary")
+									option(value="") -- Todos --
+
+						.col-sm-2
+							.form-group
+								label(for="selectMesC" style="float:left") Att.
+								input(type='number',class="form-control", id = "selectMesC",name="data[mes]" style="width: 100%;" ,placeholder="Meses")
+						.col-sm-3
+							.form-group
+								label(for="cidadeConsultarC" style="float:left") Cidade
+								input(type='text',class="form-control", id = "cidadeConsultarC", name="data[cidade]", style="width: 100%;" ,placeholder="Cidade", maxlength="230")
+						.col-sm-1
+							.form-group
+								label(for="pesquisarC" style="float:left")  
+								button.btn.btn-default.form-control(type='button' id='pesquisarC')
+									span.glyphicon.glyphicon-search
+
+
+					.row
+						.col-sm-12
+							.table-responsive(style="height: auto !important; max-height: 300px; overflow-y: auto !important;")
+								table.table.table-bordered.text-center.table-hover.table-condensed#autoridadesC.table-striped
+									thead
+										tr.info
+											th.text-center
+												input#todosC(type='checkbox')
+											th.text-center Id
+											th.text-center Nome
+											th.text-center Titulo
+											th.text-center Partido
+											th.text-center Cidade
+											th.text-center ult.Att.
+											th.text-center Unidade
+									tbody
+					.row(style="margin: 5px;")
+						.col-sm-4
+							button.btn.btn-default(type='button' id='pdfConvitesQR') Convite QRCode 
+								span.glyphicon.glyphicon-qrcode
+						.col-sm-4
+							button.btn.btn-default(type='button' id='pdfConvites') Convite  
+								span.glyphicon.glyphicon-envelope
+						.col-sm-4
+							button.btn.btn-default(type='button' id='pdfListaConvidados') Lista de Convidados  
+								span.glyphicon.glyphicon-envelope
+				.container-fluid.firebase(style="background-color: rgba(91, 192, 222, 0.3);")
+					.row
+						h1 Autoridades Confirmadas
+						.col-sm-12
+							.table-responsive(style="height: auto !important; max-height: 300px; overflow-y: auto !important;")
+								table.table.table-bordered.text-center.table-hover.table-condensed#confirmados.table-striped
+									thead
+										tr.info
+											th.text-center Id
+											th.text-center Nome
+											th.text-center Titulo
+											th.text-center Partido
+											th.text-center Cidade
+											th.text-center ult.Att.
+											th.text-center Unidade
+									tbody
+
+			.modal-footer
+				.text-center
+					button.btn.btn-danger(type='button', data-dismiss='modal') Close

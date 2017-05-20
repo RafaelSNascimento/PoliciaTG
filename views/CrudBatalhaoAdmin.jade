@@ -1,0 +1,176 @@
+include layout
+	script(src="/javascripts/jsGlobal/CrudBatalhao.js")
+nav.navbar.navbar-inverse
+	script.
+		var dadosIniciais = !{result}
+	.container-fluid
+		// Brand and toggle get grouped for better mobile display
+		.navbar-header
+			img.navbar-brand(src="bootstrap/css/icons/police.png")
+			button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+				span.sr-only Toggle navigation
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+
+		div( id="bs-example-navbar-collapse-1" class="collapse navbar-collapse text-center")
+			ul(class="nav navbar-nav navbar-left")
+				li(class = "active" class="dropdown")
+					a(id ="b", href="#") Cadastrar Batalhão
+				li
+					a(id ="ab",href="#") Alterar Batalhão
+				li
+					a(id="db",href="#") Excluir Batalhão
+					
+				li
+					a(id ="cb",href="#") Batalhão x Cidade
+			ul(class="nav navbar-nav navbar-right")
+				li
+					a(href="/homeAdmin") Home 
+						span.glyphicon.glyphicon-home
+					
+#myModal.modal.fade(role='dialog')
+	.modal-dialog
+		// Modal content
+		.modal-content
+			.modal-header.text-center
+				h4 Carregando Dados
+			.modal-body
+				.loading-progress
+			
+//Cadastrar Batalhão
+div.container-fluid.text-center
+	div.row-fluid.b
+		h1 Cadastrar Batalhão
+		br
+		form(id="formCadastrarB", method='POST', style="width: auto;")
+			div.row
+				div.col-sm-offset-5.col-sm-2.col-sm-offset-5
+					img(class="img-responsive img-thumbnail img", src="/images/noBrasao.png").shadow
+					div.text-center(style="padding: 5px;").form-group.groupimg
+						label(class="form-control btn btn-default btn-ls btn-file strong text-center" id="imgUpload") Selecionar 
+							input(type="file", style="display: none;")
+							span(class="glyphicon glyphicon-open-file" aria-hidden="true")
+			div(class="form-group")
+				label(for="nome" style="float:left") Nome do Batalhão
+				input(type='text',class="form-control", id = "nome", style="width: 100%;" ,placeholder="Nome")
+			
+			div(class="form-group")
+				label(for="comandante" style="float:left") Comandante
+				input(type="text", id="comandante",class="form-control", style="width: 100%;" ,placeholder="Comandante")
+			div(class="form-group")
+				label(for="selectGenero" style="float:left") Gênero
+				select(name="select", id="selectGenero",class="form-control", data-style="btn-primary")
+					option(disabled selected value) -- Selecione uma Opção --
+					option(value="f") Feminino
+					option(value="m") Masculino
+
+			div.row
+				div.col-md-2.form-group
+					label(for="cep" style="float:left") CEP
+					input#cep(type='text', maxlength='8', placeholder='Ex: 13483-087', onkeypress='return event.charCode >= 48 && event.charCode <= 57' ,class="form-control")
+				div.col-md-3.form-group
+					label(for="uf" style="float:left") UF
+					input#uf(type='text',class="form-control")
+				div.col-md-2.form-group
+					label(for="cidade" style="float:left") Cidade
+					input#cidade(type='text',class="form-control")
+				div.col-md-3.form-group
+					label(for="logradouro" style="float:left") Endereço
+					input#logradouro(type='text',class="form-control")
+				div.col-md-2.form-group
+					label(for="bairro" style="float:left") Bairro
+					input#bairro(type='text',class="form-control")
+
+			hr
+			p
+				button(type="button" id="cadastrarB" class="btn btn-default btn-lg") Cadastrar Batalhão 
+					span(class="glyphicon glyphicon-flag" aria-hidden="true")
+		hr
+
+//Alterar Batalhão
+div.container-fluid.text-center
+	div.row-fluid.ab
+		h1 Alterar Batalhão
+		br
+		form(id="formAlterar", method='POST', style="width: auto;")
+			div(class="form-group")
+				label(for="selectAlterar" style="float:left") Nome do Batalhão
+				select(name="select", id="selectAlterar" ,class=" form-control", data-style="btn-primary")
+			div.alterar
+				div.row
+					div.col-sm-offset-5.col-sm-2.col-sm-offset-5
+						img(class="img-responsive img-thumbnail imgLoad", src="/images/noBrasao.png").shadow
+						div.text-center(style="padding: 5px;").form-group.groupimg
+							label(class="form-control btn btn-default btn-file btn-ls text-center strong " id="imgAlterar")  Alterar  
+								input( type="file", style="display: none;")
+								span(class="glyphicon glyphicon-open-file" aria-hidden="true")
+
+				div(class="form-group")
+					label(for="nomeAlterar" style="float:left") Nome do Batalhão
+					input(type='text',class="form-control", id = "nomeAlterar", style="width: 100%;" ,placeholder="Nome")
+
+				div(class="form-group")
+					label(for="comandanteAlterar" style="float:left") Comandante
+					input(type="text", id="comandanteAlterar",class="form-control", style="width: 100%;" ,placeholder="Comandante")
+
+				div(class="form-group")
+					label(for="selectGeneroA" style="float:left") Gênero
+					select(name="select", id="selectGeneroA",class="form-control", data-style="btn-primary")
+						option(disabled selected value) -- Selecione uma Opção --
+						option(value="f") Feminino
+						option(value="m") Masculino
+						
+				div.row
+					div.col-md-2.form-group
+						label(for="cepAlterar" style="float:left") CEP
+						input#cepAlterar(type='text', maxlength='9', placeholder='Ex: 13483-087' ,class="form-control")
+					div.col-md-3.form-group
+						label(for="ufAlterar" style="float:left") UF
+						input#ufAlterar(type='text',class="form-control")
+					div.col-md-2.form-group
+						label(for="cidadeAlterar" style="float:left") Cidade
+						input#cidadeAlterar(type='text',class="form-control")
+					div.col-md-3.form-group
+						label(for="logradouroAlterar" style="float:left") Endereço
+						input#logradouroAlterar(type='text',class="form-control")
+					div.col-md-2.form-group
+						label(for="bairroAlterar" style="float:left") Bairro
+						input#bairroAlterar(type='text',class="form-control")
+				hr
+				p
+					button(type="button" id="alterarB" class="btn btn-default btn-lg") Alterar Batalhão 
+						span(class="glyphicon glyphicon-flag" aria-hidden="true")
+			hr
+	//Adicionar Relação
+div.container-fluid
+	div.row-fluid.cb.text-center
+		h1 Adicionar Cidade a um Batalhão
+		br
+		form(id="formCB", method='POST', style="width: auto;")
+			div(class="form-group")
+				label(for="selectBatalhao" style="float:left") Batalhão
+				select(name="select", id="selectBatalhao" ,class=" form-control", data-style="btn-primary")
+			div(class="form-group")
+				label(for="selectCidade" style="float:left") Cidade
+				select(name="select", id="selectCidade",class="form-control", data-style="btn-primary")
+			hr
+			p
+				button(type="button" id="relacionar" class="btn btn-default btn-lg") Adicionar Cidade 
+					span(class="glyphicon glyphicon-ok" aria-hidden="true")
+			hr
+		//Lista Relãções
+		div.table-responsive.panel.panel-default.shadow
+			table.table.table-bordered.text-center.table-hover.table-condensed
+
+//excluir batahão
+div.container-fluid.text-center
+	div.row-fluid.db
+		h1 Excluir Batalhão
+		br
+		form(id="formCB", method='POST', style="width: auto;")
+			div(class="form-group")
+				label(for="deletarBatalhao" style="float:left") Batalhão
+				select(name="select", id="deletarBatalhao" ,class=" form-control", data-style="btn-primary")
+			button(type="button" id="excluirBatalhao" class="btn btn-default btn-lg") Excluir Batalhão 
+				span(class="glyphicon glyphicon-ok" aria-hidden="true")

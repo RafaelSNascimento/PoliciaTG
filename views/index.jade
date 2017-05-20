@@ -1,0 +1,14 @@
+include layout
+	script(src='/javascripts/login.js')
+	script(src="/bootstrap/js/jquery.md5.js")
+	link(rel='stylesheet', href='/stylesheets/index.css')
+.container(style="height:100%; display:table;width: 100%;padding: 0;")
+	.row(style="height: 100%; display:table-cell; vertical-align: middle;")
+		.col-sm-offset-4.col-sm-4.col-sm-offset-4.text-center
+			.login-container
+				img.img-responsive(src="/bootstrap/css/icon.png")
+				.form-box
+					form(id="form", method='POST' action="" )
+						input(id="usuario", type='text', placeholder='username')
+						input(type='password',id="senha", placeholder='password')
+						button(type="button" id="login" class="btn btn-info btn-block login") Log In 

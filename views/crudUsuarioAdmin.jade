@@ -1,0 +1,56 @@
+include layout
+	script(src="/javascripts/jsAdmin/crudUsuarioAdmin.js")
+
+nav.navbar.navbar-inverse
+	.container-fluid
+		// Brand and toggle get grouped for better mobile display
+		.navbar-header
+			img.navbar-brand(src="bootstrap/css/icons/police.png")
+			button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+				span.sr-only Toggle navigation
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+
+		div( id="bs-example-navbar-collapse-1" class="collapse navbar-collapse text-center")
+			ul(class="nav navbar-nav navbar-right")
+				li
+					a(href="/homeadmin") Home 
+						span.glyphicon.glyphicon-home
+div.container-fluid.text-center
+	div.row-fluid
+		div.offset2.span8.offset2
+			h2 Cadastrar Usuario
+			hr
+			form(id="form", method='POST', style="width: auto;")
+				div.row
+					div.col-md-offset-5.col-md-2.col-offset-5
+						img(class="img-responsive img-thumbnail img", src="/images/noPerson.jpg")
+				br
+				div(class="form-group groupimg")
+					label(class="form-control btn btn-default btn-file" id="imgUpload" style="text-align:left;")
+						input( type="file", style="display: none;")
+						span(class="glyphicon glyphicon-open-file" aria-hidden="true")  Selecionar Foto de Perfil...
+
+				div(class="form-group")
+					label(for="nome" style="float:left") Nome
+					input(type="senha", id="nome",class="form-control", style="width: 100%;" ,placeholder="Nome")
+
+				div(class="form-group" )
+					label(for="usuario" style="float:left") Usuario
+					input(type='text',class="form-control", id = "usuario", style="width: 100%;" ,placeholder="Usuario")
+
+				div(class="form-group")
+					label(for="senha" style="float:left") Senha
+					input(type="senha", id="senha",class="form-control", style="width: 100%;" ,placeholder="Senha")
+
+				div(class="form-group")
+					label(for="selectBatalhao" style="float:left") Batalhão
+					select(name="select", id="selectBatalhao",class="form-control", data-style="btn-primary")
+						option(disabled selected value) -- Selecione uma Opção --
+
+
+				hr
+				p
+					button(type="button" id="cadastrar" class="btn btn-default btn-lg")
+						span(class="glyphicon glyphicon-user" aria-hidden="true")  Cadastrar

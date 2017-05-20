@@ -1,0 +1,118 @@
+html, body{height:100%; margin:0;padding:5px}
+a{
+  font-weight:bold;
+  font-size: 120%;
+  color: white !important;
+}
+
+option{
+  font-weight:bold;
+  font-size: 120%;
+  color: black !important;
+}
+label{
+  font-weight:bold;
+  font-size: 120%;
+  color: black !important;
+}
+
+.shadow{
+	-webkit-box-shadow: 15px 11px 29px -6px rgba(0,0,0,0.60);
+	-moz-box-shadow: 15px 11px 29px -6px rgba(0,0,0,0.60);
+	box-shadow: 15px 11px 29px -6px rgba(0,0,0,0.60);
+}
+
+
+.navbar .navbar-collapse {
+text-align: center;
+}
+.navbar-nav  li:hover{
+	color: #000;
+	background-color:black !important;
+}
+hr{
+	height: 1px;
+	margin: 2px;
+	padding: 2px;
+
+}
+.table-striped{
+  background-color:rgba(0, 0, 0, 0.1);
+}
+
+.modal-title{
+  font-size: 20px;
+}
+.table-bordered , .table-bordered> thead > tr > th,
+.table-bordered > tbody > tr > td {
+   border-color: 0.5px solid grey !important;
+}
+.tittle{
+  color:#fff !important;
+}
+.index{
+  border-radius: 15px;
+  border-color: #333;
+}
+
+.modal-content{
+  border-radius: 10px;
+  border-color: grey;
+}
+.sweet-alert {
+    max-height : 100% !important;
+    overflow-y : auto !important;
+}
+
+
+.modal-header{
+  padding:10px 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #333;
+}
+.modal-title{
+  font-size: 20px;
+}
+.modal-title,
+.close{
+  color:#fff;
+}
+
+
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 20px 0 10px 0;
+  background: #F8F8F8 ;
+  width:100%;
+}
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 90%;
+  height: 90%;
+
+}
+.profile-usertitle {
+  text-align: center;
+  margin-top: 5px;
+}
+.profile-usertitle-name {
+  font-size: 15px;
+}
+.profile-userbuttons {
+  text-align: center;
+
+}
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+.input-group-addon{
+  color: black; 
+  background-color:white;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px; 
+  border-color:grey;
+}

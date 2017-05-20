@@ -1,0 +1,150 @@
+include layout
+	script(src="/bootstrap/js/angular-1.2.0-rc3.min.js")
+
+	script(src="/bootstrap/js/sweetalert2.min.js")
+
+	script(src="/bootstrap/js/ngSweetAlert2.min.js")
+	link(rel='stylesheet', href="/stylesheets/sweetalert2.min.css")
+	script(src="/javascripts/jsAdmin/crudUsuarioWithAngular.js")
+
+div(ng-app="App" ng-controller="appController")
+	.container
+		.row
+			.col-sm-12
+				.panel.panel-default
+					.panel-heading.text-center
+						a(href="/home" style="vertical-align: middle;display: inline-block;float: left;").btn.btn-primary
+							span.glyphicon.glyphicon-home
+						h2(style="vertical-align: middle;display: inline-block;margin: 0 auto; float: none;") Lista de Usuarios
+					.panel-body
+						.col-sm-12
+							.table-responsive(style="height: auto !important; max-height: 300px; overflow-y: auto !important;")
+								table.table.table-bordered.text-center.table-hover.table-condensed#confirmados.table-striped
+									thead
+										tr.info
+											th.text-center Nome
+											th.text-center Usuario
+											th.text-center Senha
+											th.text-center Unidade
+											th.text-center Foto
+											th.text-center Alterar
+											th.text-center Excluir
+									tbody
+										tr(ng-repeat="user in users").text-center
+											td
+												{{user.nome}}
+											td
+												{{user.usuario}}
+											td
+												{{user.senha}}
+											td
+												{{user.unidadeNome}}
+											td
+												img(ng-src="{{user.img ? user.img : '/images/noPerson.jpg'}}" style="max-height:50px; max-width: 50px; border-radius: 5px;").img-responsive.center-block
+											td
+												button(ng-click="selectedUser(user)"  data-toggle="modal" data-target="#myModal").btn.btn-warning Alterar
+											td
+												button(ng-click="deleteUser(user)").btn.btn-danger Excluir
+					.panel-footer.text-right
+						button(data-toggle="modal" data-target="#newUserModal").btn.btn-success Novo Usuario 
+							span(class="glyphicon glyphicon-plus")
+	#myModal.modal.fade(role='dialog')
+		.modal-dialog
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal') ×
+					h4.modal-title Usuario Informação
+				.modal-body
+					form(id="form", method='POST', style="width: auto;")
+						div.row
+							div.col-sm-offset-4.col-sm-4.col-sm-offset-4
+								img(class="img-responsive img-thumbnail" , ng-src="{{userSelected.img ? userSelected.img : '/images/noPerson.jpg'}}" id="img").shadow
+								div.text-center(style="padding: 5px;").form-group.groupimg
+									label(class="form-control strong btn btn-default btn-ls btn-file" id="imgUpload") Alterar 
+										input(id="inputImg" type="file",file-model="myFile", style="display: none;")
+										span(class="glyphicon strong glyphicon-open-file" aria-hidden="true")
+
+						div(class="form-group")
+							label.strong(for="nomeAlterar" style="float:left") Nome
+							input(type="text" ng-model="userSelected.nome" ,class="form-control", style="width: 100%;" ,placeholder="Nome")
+
+						div(class="form-group" )
+							label.strong(for="usuarioAlterar" style="float:left") Usuario
+							input(type='text',ng-model="userSelected.usuario",class="form-control",  style="width: 100%;" ,placeholder="Usuario")
+
+						div(class="form-group")
+							label.strong(for="senhaAlterar" style="float:left") Senha
+							input(type="senha", ng-model="userSelected.senha",class="form-control", style="width: 100%;" ,placeholder="Senha")
+
+						div(class="form-group")
+							label.strong(for="selectBAlterar" style="float:left") Batalhão
+							select(name="select", ng-model="userSelected.idUnidade",class="form-control", data-style="btn-primary")
+								option(ng-selected = "item.id == userSelected.idUnidade", ng-repeat="item in batalhao track by item.id" value="{{item.id}}") 
+									{{item.nome}}
+								option(disabled selected value) -- Selecione uma Opção --
+						div(class="form-group")
+							label.strong(for="selectBAlterar" style="float:left") Nivel do Usuário
+							select(name="select", ng-model="userSelected.role",class="form-control", data-style="btn-primary")
+								option(value="1") Usuário Administrador
+								option(value="0") Usuário Comum
+								option(disabled selected value) -- Selecione uma Opção --
+								
+
+				.modal-footer
+					div.text-center
+						button(type="button" ng-click="alterUser(userSelected)" class="btn strong btn-default btn-lg" data-dismiss='modal' style="margin: 5px;") Alterar 
+
+							span(class="glyphicon glyphicon-pencil" aria-hidden="true")
+						button(type="button" id="excluir" class="btn btn-danger strong  btn-lg" data-dismiss='modal' style="margin: 5px;") Excluir Conta 
+							span(class="glyphicon glyphicon-remove-sign" aria-hidden="true") 
+						button.btn.btn-default.btn-lg.strong(type='button', data-dismiss='modal' style="margin: 5px;") Close ×
+
+	#newUserModal.modal.fade(role='dialog')
+		.modal-dialog
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal') ×
+					h4.modal-title Usuario Informação
+				.modal-body
+					form(id="form", method='POST', style="width: auto;")
+						div.row
+							div.col-sm-offset-4.col-sm-4.col-sm-offset-4
+								img(class="img-responsive img-thumbnail" , ng-src='{{newUser.img ? newUser.img:"/images/noPerson.jpg"}}' id="imgNewUser").shadow
+								div.text-center(style="padding: 5px;").form-group.groupimg
+									label(class="form-control strong btn btn-default btn-ls btn-file" id="imgUpload") Alterar 
+										input( type="file",file-model="myFileNewUser", style="display: none;")
+										span(class="glyphicon strong glyphicon-open-file" aria-hidden="true")
+
+						div(class="form-group")
+							label.strong(for="nomeAlterar" style="float:left") Nome
+							input(type="text" ng-model="newUser.nome" ,class="form-control", style="width: 100%;" ,placeholder="Nome")
+
+						div(class="form-group" )
+							label.strong(for="usuarioAlterar" style="float:left") Usuario
+							input(type='text',ng-model="newUser.usuario",class="form-control",  style="width: 100%;" ,placeholder="Usuario")
+
+						div(class="form-group")
+							label.strong(for="senhaAlterar" style="float:left") Senha
+							input(type="senha", ng-model="newUser.senha",class="form-control", style="width: 100%;" ,placeholder="Senha")
+
+						div(class="form-group")
+							label.strong(for="selectBAlterar" style="float:left") Batalhão
+							select(name="select", ng-model="newUser.idUnidade",class="form-control", data-style="btn-primary")
+								option(ng-selected = "item.id == newUser.idUnidade", ng-repeat="item in batalhao track by item.id" value="{{item.id}}") 
+									{{item.nome}}
+								option(disabled selected value) -- Selecione uma Opção --
+						div(class="form-group")
+							label.strong(for="selectBAlterar" style="float:left") Nivel do Usuário
+							select(name="select", ng-model="newUser.role",class="form-control", data-style="btn-primary")
+								option(value="1") Usuário Administrador
+								option(value="0") Usuário Comum
+								option(disabled selected value) -- Selecione uma Opção --
+								
+
+				.modal-footer
+					div.text-center
+						button(type="button" ng-click="addNewUser()" class="btn strong btn-default btn-lg" data-dismiss='modal' style="margin: 5px;") Adicionar 
+							span(class="glyphicon glyphicon-pencil" aria-hidden="true")
+						button(type="button" id="excluir" class="btn btn-danger strong  btn-lg" data-dismiss='modal' style="margin: 5px;") Excluir Conta 
+							span(class="glyphicon glyphicon-remove-sign" aria-hidden="true") 
+						button.btn.btn-default.btn-lg.strong(type='button', data-dismiss='modal' style="margin: 5px;") Close ×

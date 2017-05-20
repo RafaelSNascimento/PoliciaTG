@@ -1,0 +1,26 @@
+include layout
+nav.navbar.navbar-inverse
+	.container-fluid
+		// Brand and toggle get grouped for better mobile display
+		.navbar-header
+			button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+				span.sr-only Toggle navigation
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+
+		div( id="bs-example-navbar-collapse-1" class="collapse navbar-collapse text-center")
+			ul(class="nav navbar-nav navbar-left")
+				li
+					a(href='/crudBatalhaoAdmin') Gerenciar Batalhao
+				li
+					a(href='/crudUsuarioAdmin') Gerenciar Usuario
+			ul(class="nav navbar-nav navbar-right")
+				li
+					a(href="/deslogaruc") Deslogar 
+						span.glyphicon.glyphicon-log-out
+
+
+		// /.navbar-collapse
+	// /.container-fluid
+
